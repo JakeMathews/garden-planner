@@ -151,8 +151,9 @@
     });
 
     sectionsHtml += `
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="${plantId}">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">${plant}</span>
           <span class="plant-count">${items.length} ${items.length === 1 ? 'variety' : 'varieties'}</span>
           <div class="rating section-rating" data-key="${plantId}" data-plant="${plant}">
@@ -188,15 +189,20 @@
     .instructions small { color: #999; font-size: 13px; display: block; margin-top: 8px; }
     .stats { text-align: center; color: #888; margin-bottom: 16px; font-size: 14px; }
     .plant-section {
-      background: #242424; border-radius: 10px; margin-bottom: 12px; overflow: hidden;
+      background: #242424; border-radius: 10px; margin-bottom: 8px; overflow: hidden;
       box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
     .plant-header {
       background: #3d4a2a; padding: 12px 14px; display: flex; align-items: center; gap: 10px;
+      cursor: pointer; user-select: none;
     }
+    .plant-header:hover { background: #4a5a35; }
+    .toggle-icon { font-size: 12px; color: #888; transition: transform 0.2s; width: 12px; }
+    .plant-section.open .toggle-icon { transform: rotate(90deg); }
     .plant-name { font-weight: bold; font-size: 1.1em; color: #c5d99a; }
     .plant-count { color: #888; font-size: 0.85em; margin-right: auto; }
-    .varieties { padding: 0; }
+    .varieties { display: none; padding: 0; }
+    .plant-section.open .varieties { display: block; }
     .seed-item {
       display: flex; justify-content: space-between; align-items: center;
       padding: 12px 14px; border-bottom: 1px solid #333;
@@ -261,7 +267,7 @@
     <div class="how-to">
       ⭐ = Maybe &nbsp;&nbsp; ⭐⭐ = Yes please! &nbsp;&nbsp; ⭐⭐⭐ = Must grow!
     </div>
-    <small>🥕 You can rate a whole plant type (like "Carrots") or pick specific varieties.<br>
+    <small>🥕 Tap a plant to expand and see varieties. Rate the whole plant or pick specific ones.<br>
     Rate as many or as few as you'd like — no pressure! 🍅</small>
   </div>
   <div class="stats">🌿 ${seeds.length} seeds from ${uniqueSources.length} sources ready to plant!</div>
@@ -298,11 +304,22 @@
       }
     });
 
+    // Toggle sections on header click
+    document.querySelectorAll('.plant-header').forEach(header => {
+      header.addEventListener('click', (e) => {
+        // Don't toggle if clicking on stars
+        if (e.target.closest('.rating')) return;
+        const section = header.closest('.plant-section');
+        section.classList.toggle('open');
+      });
+    });
+
     // Star clicks
     document.body.addEventListener('click', (e) => {
       const star = e.target.closest('.star');
       if (!star || star.disabled) return;
       e.preventDefault();
+      e.stopPropagation();
 
       const rating = star.closest('.rating');
       const key = rating.dataset.key;
