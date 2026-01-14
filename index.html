@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Seed Rating - Pick Your Favorites!</title>
+  <title>🌱 Mom's Garden Picks</title>
   <style>
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     body {
@@ -13,40 +13,38 @@
     }
     h1 { text-align: center; color: #a4b862; margin-bottom: 8px; font-size: 1.6em; }
     .instructions {
-      background: #2d2d2d; padding: 14px; border-radius: 8px; margin-bottom: 16px;
+      background: #2d2d2d; padding: 16px; border-radius: 12px; margin-bottom: 16px;
       border: 1px solid #3d4a2a; font-size: 15px; text-align: center;
     }
-    .instructions small { color: #999; font-size: 13px; display: block; margin-top: 6px; }
-    .stats { text-align: center; color: #888; margin-bottom: 12px; font-size: 14px; }
-    .filter-bar {
-      display: flex; gap: 10px; margin-bottom: 16px; align-items: center; justify-content: center;
-    }
-    .filter-bar label { color: #a4b862; font-size: 14px; }
-    .filter-bar select {
-      padding: 8px 12px; border-radius: 6px; border: 1px solid #556b2f;
-      background: #2d2d2d; color: #e0e0e0; font-size: 14px;
-    }
+    .instructions .greeting { font-size: 18px; margin-bottom: 8px; }
+    .instructions .how-to { margin: 10px 0; }
+    .instructions small { color: #999; font-size: 13px; display: block; margin-top: 8px; }
+    .stats { text-align: center; color: #888; margin-bottom: 16px; font-size: 14px; }
     .plant-section {
-      background: #242424; border-radius: 8px; margin-bottom: 12px; overflow: hidden;
+      background: #242424; border-radius: 10px; margin-bottom: 8px; overflow: hidden;
       box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
     .plant-header {
-      background: #3d4a2a; padding: 12px 14px; display: flex; align-items: center;
-      gap: 10px;
+      background: #3d4a2a; padding: 12px 14px; display: flex; align-items: center; gap: 10px;
+      cursor: pointer; user-select: none;
     }
+    .plant-header:hover { background: #4a5a35; }
+    .toggle-icon { font-size: 12px; color: #888; transition: transform 0.2s; width: 12px; }
+    .plant-section.open .toggle-icon { transform: rotate(90deg); }
     .plant-name { font-weight: bold; font-size: 1.1em; color: #c5d99a; }
     .plant-count { color: #888; font-size: 0.85em; margin-right: auto; }
-    .varieties { padding: 0; }
+    .varieties { display: none; padding: 0; }
+    .plant-section.open .varieties { display: block; }
     .seed-item {
       display: flex; justify-content: space-between; align-items: center;
       padding: 12px 14px; border-bottom: 1px solid #333;
     }
     .seed-item:last-child { border-bottom: none; }
-    .seed-item.hidden { display: none; }
     .seed-info { flex: 1; min-width: 0; }
     .variety-name { display: block; font-weight: 600; color: #e0e0e0; font-size: 15px; margin-bottom: 4px; }
     .seed-details { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
     .source { font-size: 12px; color: #8a8a8a; }
+    .source-select { font-size: 12px; padding: 2px 6px; border-radius: 4px; border: 1px solid #555; background: #333; color: #e0e0e0; }
     .year { font-size: 12px; color: #6a6a6a; }
     .status-pill {
       font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 500;
@@ -90,28 +88,25 @@
   </style>
 </head>
 <body>
-  <h1>🌱 Seed Box Rating</h1>
+  <h1>🌱 Mom's Garden Picks 🌻</h1>
   <noscript>
     <strong>📱 Open in Safari!</strong><br>
     Tap the share button then "Open in Safari" to use this page.
   </noscript>
   <div class="instructions">
-    <strong>Hi Mom!</strong> Rate the seeds you'd like me to grow this year.<br>
-    ⭐ = Maybe &nbsp; ⭐⭐ = Yes &nbsp; ⭐⭐⭐ = Must grow!<br>
-    <small>Rate an entire plant type OR pick specific varieties.<br>
-    Rate as many or as few as you'd like — no pressure!</small>
+    <div class="greeting">💚 Hi Mom! 💚</div>
+    <div>Help me decide what to grow this year by rating the seeds you'd like to see in the garden!</div>
+    <div class="how-to">
+      ⭐ = Maybe &nbsp;&nbsp; ⭐⭐ = Yes please! &nbsp;&nbsp; ⭐⭐⭐ = Must grow!
+    </div>
+    <small>🥕 Tap a plant to expand and see varieties. Rate the whole plant or pick specific ones.<br>
+    Rate as many or as few as you'd like — no pressure! 🍅</small>
   </div>
-  <div class="stats">186 seeds from 8 sources</div>
-  <div class="filter-bar">
-    <label for="source-filter">Filter by source:</label>
-    <select id="source-filter">
-      <option value="">All Sources</option>
-      <option value="Graffiti Grdn">Graffiti Grdn</option><option value="Homegrown Garden">Homegrown Garden</option><option value="Johnny’s Selected Seeds">Johnny’s Selected Seeds</option><option value="Lush & Dew">Lush & Dew</option><option value="Mathews Farms">Mathews Farms</option><option value="Organo Republic">Organo Republic</option><option value="Sow Right Seeds">Sow Right Seeds</option><option value="Survival Essentials">Survival Essentials</option>
-    </select>
-  </div>
+  <div class="stats">🌿 216 seeds from 8 sources ready to plant!</div>
   
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_amaranth">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Amaranth</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_amaranth" data-plant="Amaranth">
@@ -121,7 +116,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Red Garnet</span>
             <div class="seed-details">
@@ -137,8 +132,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_arugula">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Arugula</span>
           <span class="plant-count">2 varieties</span>
           <div class="rating section-rating" data-key="plant_arugula" data-plant="Arugula">
@@ -148,7 +144,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -163,7 +159,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Roquette</span>
             <div class="seed-details">
@@ -179,8 +175,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_asparagus">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Asparagus</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_asparagus" data-plant="Asparagus">
@@ -190,7 +187,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Mary Washington</span>
             <div class="seed-details">
@@ -206,10 +203,11 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_basil">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Basil</span>
-          <span class="plant-count">2 varieties</span>
+          <span class="plant-count">3 varieties</span>
           <div class="rating section-rating" data-key="plant_basil" data-plant="Basil">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
@@ -217,22 +215,37 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Johnny’s Selected Seeds,Lush & Dew">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
-              <span class="source">Johnny’s Selected Seeds, Lush & Dew</span>
+              <span class="source">Lush & Dew</span>
               <span class="year">2025</span>
-              <span class="status-pill half_full">Half Full</span>
+              <span class="status-pill full">Full</span>
             </div>
           </div>
-          <div class="rating variety-rating" data-key="0RcAbv0VjT4bqhMS58nu" data-plant="Basil" data-variety="">
+          <div class="rating variety-rating" data-key="gWlh1kYv8Y2uSqntlF4A" data-plant="Basil" data-variety="">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Everleaf Lemon</span>
+            <div class="seed-details">
+              <span class="source">Johnny’s Selected Seeds</span>
+              <span class="year">2024</span>
+              <span class="status-pill half_full">Half</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="0RcAbv0VjT4bqhMS58nu" data-plant="Basil" data-variety="Everleaf Lemon">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Italian Large Leaf</span>
             <div class="seed-details">
@@ -248,10 +261,11 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_bean">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Bean</span>
-          <span class="plant-count">6 varieties</span>
+          <span class="plant-count">7 varieties</span>
           <div class="rating section-rating" data-key="plant_bean" data-plant="Bean">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
@@ -259,22 +273,37 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
               <span class="source">Lush & Dew</span>
               <span class="year">2025</span>
-              <span class="status-pill nearly_empty">Nearly Empty</span>
+              <span class="status-pill nearly_empty">Low</span>
             </div>
           </div>
-          <div class="rating variety-rating" data-key="AeFZMJZCGN0XSjcROsw1" data-plant="Bean" data-variety="">
+          <div class="rating variety-rating" data-key="NEbsObYUQVcxVfspbMDk" data-plant="Bean" data-variety="">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Lush & Dew">
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Adzuki</span>
+            <div class="seed-details">
+              <span class="source">Lush & Dew</span>
+              <span class="year">2025</span>
+              <span class="status-pill nearly_empty">Low</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="AeFZMJZCGN0XSjcROsw1" data-plant="Bean" data-variety="Adzuki">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Blue Lake 47 Bush</span>
             <div class="seed-details">
@@ -289,7 +318,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Blue Lake Bush</span>
             <div class="seed-details">
@@ -304,7 +333,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Fava Broad Windsor</span>
             <div class="seed-details">
@@ -319,7 +348,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Golden Wax</span>
             <div class="seed-details">
@@ -334,7 +363,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Lima King Of The Garden Pole</span>
             <div class="seed-details">
@@ -350,10 +379,11 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_beet">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Beet</span>
-          <span class="plant-count">7 varieties</span>
+          <span class="plant-count">8 varieties</span>
           <div class="rating section-rating" data-key="plant_beet" data-plant="Beet">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
@@ -361,22 +391,22 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic,Lush & Dew,Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
-              <span class="source">Organo Republic, Lush & Dew, Survival Essentials</span>
-              <span class="year">2026</span>
+              <span class="source">Lush & Dew</span>
+              <span class="year">2025</span>
               <span class="status-pill full">Full</span>
             </div>
           </div>
-          <div class="rating variety-rating" data-key="dciMFpjmbjbjE8t7XIUp" data-plant="Beet" data-variety="">
+          <div class="rating variety-rating" data-key="lhtBDEtVikIt747DTQUB" data-plant="Beet" data-variety="">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Burpees Golden</span>
             <div class="seed-details">
@@ -391,11 +421,11 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Organo Republic,Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Chioggia</span>
             <div class="seed-details">
-              <span class="source">Organo Republic, Survival Essentials</span>
+              <select class="source-select"><option>Any</option><option>Organo Republic</option><option>Survival Essentials</option></select>
               <span class="year">2026</span>
               <span class="status-pill full">Full</span>
             </div>
@@ -406,7 +436,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Cylindra</span>
             <div class="seed-details">
@@ -421,7 +451,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Detroit Dark Red</span>
             <div class="seed-details">
@@ -436,7 +466,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Detroit Dark Red Organic</span>
             <div class="seed-details">
@@ -451,7 +481,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Early Wonder</span>
             <div class="seed-details">
@@ -465,10 +495,26 @@
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Ruby Queen</span>
+            <div class="seed-details">
+              <select class="source-select"><option>Any</option><option>Organo Republic</option><option>Survival Essentials</option></select>
+              <span class="year">2026</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="dciMFpjmbjbjE8t7XIUp" data-plant="Beet" data-variety="Ruby Queen">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_bok_choy">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Bok Choy</span>
           <span class="plant-count">2 varieties</span>
           <div class="rating section-rating" data-key="plant_bok_choy" data-plant="Bok Choy">
@@ -478,7 +524,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -493,7 +539,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Choi</span>
             <div class="seed-details">
@@ -509,8 +555,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_borage">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Borage</span>
           <span class="plant-count">2 varieties</span>
           <div class="rating section-rating" data-key="plant_borage" data-plant="Borage">
@@ -520,39 +567,40 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Johnny’s Selected Seeds">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
-            <div class="seed-details">
-              <span class="source">Johnny’s Selected Seeds</span>
-              <span class="year">2024</span>
-              <span class="status-pill mostly_full">Mostly Full</span>
-            </div>
-          </div>
-          <div class="rating variety-rating" data-key="zsBxtREuJHEn8ud35Cgl" data-plant="Borage" data-variety="">
-            <button class="star" data-value="1">☆</button>
-            <button class="star" data-value="2">☆</button>
-            <button class="star" data-value="3">☆</button>
-          </div>
-        </div>
-        <div class="seed-item" data-sources="Survival Essentials">
-          <div class="seed-info">
-            <span class="variety-name">Common</span>
             <div class="seed-details">
               <span class="source">Survival Essentials</span>
               <span class="year">2026</span>
               <span class="status-pill full">Full</span>
             </div>
           </div>
-          <div class="rating variety-rating" data-key="lrlwYJSeJsWEywiBcmQs" data-plant="Borage" data-variety="Common">
+          <div class="rating variety-rating" data-key="lrlwYJSeJsWEywiBcmQs" data-plant="Borage" data-variety="">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Borage</span>
+            <div class="seed-details">
+              <span class="source">Johnny’s Selected Seeds</span>
+              <span class="year">2024</span>
+              <span class="status-pill mostly_full">Good</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="zsBxtREuJHEn8ud35Cgl" data-plant="Borage" data-variety="Borage">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_broccoli">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Broccoli</span>
           <span class="plant-count">2 varieties</span>
           <div class="rating section-rating" data-key="plant_broccoli" data-plant="Broccoli">
@@ -562,11 +610,11 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew,Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
-              <span class="source">Lush & Dew, Organo Republic</span>
+              <select class="source-select"><option>Any</option><option>Lush & Dew</option><option>Organo Republic</option></select>
               <span class="year">2025</span>
               <span class="status-pill full">Full</span>
             </div>
@@ -577,7 +625,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Green Sprouting</span>
             <div class="seed-details">
@@ -593,8 +641,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_broccoli_rabe">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Broccoli Rabe</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_broccoli_rabe" data-plant="Broccoli Rabe">
@@ -604,7 +653,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -620,8 +669,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_brussels_sprouts">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Brussels Sprouts</span>
           <span class="plant-count">2 varieties</span>
           <div class="rating section-rating" data-key="plant_brussels_sprouts" data-plant="Brussels Sprouts">
@@ -631,7 +681,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -646,7 +696,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Sprouts Long Island</span>
             <div class="seed-details">
@@ -662,10 +712,11 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_cabbage">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Cabbage</span>
-          <span class="plant-count">2 varieties</span>
+          <span class="plant-count">3 varieties</span>
           <div class="rating section-rating" data-key="plant_cabbage" data-plant="Cabbage">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
@@ -673,22 +724,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic,Survival Essentials">
-          <div class="seed-info">
-            <span class="variety-name">(standard)</span>
-            <div class="seed-details">
-              <span class="source">Organo Republic, Survival Essentials</span>
-              <span class="year">2026</span>
-              <span class="status-pill full">Full</span>
-            </div>
-          </div>
-          <div class="rating variety-rating" data-key="4qUDhDaNnMHE7jLCh1it" data-plant="Cabbage" data-variety="">
-            <button class="star" data-value="1">☆</button>
-            <button class="star" data-value="2">☆</button>
-            <button class="star" data-value="3">☆</button>
-          </div>
-        </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Copenhagen Market</span>
             <div class="seed-details">
@@ -702,10 +738,41 @@
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Golden Acre</span>
+            <div class="seed-details">
+              <select class="source-select"><option>Any</option><option>Organo Republic</option><option>Survival Essentials</option></select>
+              <span class="year">2026</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="AEIeZJ2TEMJRKxuFfdta" data-plant="Cabbage" data-variety="Golden Acre">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Red Cabbage</span>
+            <div class="seed-details">
+              <span class="source">Organo Republic</span>
+              <span class="year">2025</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="4qUDhDaNnMHE7jLCh1it" data-plant="Cabbage" data-variety="Red Cabbage">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_calendula">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Calendula</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_calendula" data-plant="Calendula">
@@ -715,24 +782,25 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Johnny’s Selected Seeds">
+        <div class="seed-item">
           <div class="seed-info">
-            <span class="variety-name">(standard)</span>
+            <span class="variety-name">Alpha</span>
             <div class="seed-details">
               <span class="source">Johnny’s Selected Seeds</span>
               <span class="year">2024</span>
-              <span class="status-pill half_full">Half Full</span>
+              <span class="status-pill half_full">Half</span>
             </div>
           </div>
-          <div class="rating variety-rating" data-key="H4Cxh4W1D5uGYvgrCoTY" data-plant="Calendula" data-variety="">
+          <div class="rating variety-rating" data-key="H4Cxh4W1D5uGYvgrCoTY" data-plant="Calendula" data-variety="Alpha">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_cantaloupe">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Cantaloupe</span>
           <span class="plant-count">7 varieties</span>
           <div class="rating section-rating" data-key="plant_cantaloupe" data-plant="Cantaloupe">
@@ -742,13 +810,13 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
               <span class="source">Lush & Dew</span>
               <span class="year">2025</span>
-              <span class="status-pill nearly_empty">Nearly Empty</span>
+              <span class="status-pill nearly_empty">Low</span>
             </div>
           </div>
           <div class="rating variety-rating" data-key="thS2DfHegZoFoyonFA3L" data-plant="Cantaloupe" data-variety="">
@@ -757,7 +825,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Banana</span>
             <div class="seed-details">
@@ -772,7 +840,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Hale s Best Jumbo</span>
             <div class="seed-details">
@@ -787,7 +855,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Hearts Of Gold</span>
             <div class="seed-details">
@@ -802,7 +870,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Honey Dew Green Flesh</span>
             <div class="seed-details">
@@ -817,7 +885,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Honey Rock</span>
             <div class="seed-details">
@@ -832,7 +900,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Rocky Ford Green Flesh</span>
             <div class="seed-details">
@@ -848,10 +916,11 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_carrot">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Carrot</span>
-          <span class="plant-count">5 varieties</span>
+          <span class="plant-count">8 varieties</span>
           <div class="rating section-rating" data-key="plant_carrot" data-plant="Carrot">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
@@ -859,12 +928,12 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew,Organo Republic,Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
-              <span class="source">Lush & Dew, Organo Republic, Survival Essentials</span>
-              <span class="year">2026</span>
+              <span class="source">Lush & Dew</span>
+              <span class="year">2025</span>
               <span class="status-pill full">Full</span>
             </div>
           </div>
@@ -874,7 +943,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Danvers</span>
             <div class="seed-details">
@@ -889,7 +958,22 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Imperator 58</span>
+            <div class="seed-details">
+              <span class="source">Organo Republic</span>
+              <span class="year">2025</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="9NLcNvidgMkV1CkdxgeG" data-plant="Carrot" data-variety="Imperator 58">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Red Cored Chantenay</span>
             <div class="seed-details">
@@ -904,7 +988,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Royal Chantenay</span>
             <div class="seed-details">
@@ -919,7 +1003,22 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Scarlet Nantes</span>
+            <div class="seed-details">
+              <select class="source-select"><option>Any</option><option>Organo Republic</option><option>Survival Essentials</option></select>
+              <span class="year">2026</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="qktVbEzrRmupmhFakEuO" data-plant="Carrot" data-variety="Scarlet Nantes">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Shin Kuroda</span>
             <div class="seed-details">
@@ -933,10 +1032,26 @@
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Tendersweet</span>
+            <div class="seed-details">
+              <span class="source">Organo Republic</span>
+              <span class="year">2025</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="CUZh3IygnXOnCMpBntW8" data-plant="Carrot" data-variety="Tendersweet">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_cauliflower">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Cauliflower</span>
           <span class="plant-count">2 varieties</span>
           <div class="rating section-rating" data-key="plant_cauliflower" data-plant="Cauliflower">
@@ -946,7 +1061,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -961,7 +1076,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Snowball Y</span>
             <div class="seed-details">
@@ -977,10 +1092,11 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_celery">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Celery</span>
-          <span class="plant-count">2 varieties</span>
+          <span class="plant-count">3 varieties</span>
           <div class="rating section-rating" data-key="plant_celery" data-plant="Celery">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
@@ -988,11 +1104,11 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic,Johnny’s Selected Seeds">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
-              <span class="source">Organo Republic, Johnny’s Selected Seeds</span>
+              <span class="source">Organo Republic</span>
               <span class="year">2025</span>
               <span class="status-pill full">Full</span>
             </div>
@@ -1003,7 +1119,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Tall Utah</span>
             <div class="seed-details">
@@ -1017,10 +1133,26 @@
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Tango</span>
+            <div class="seed-details">
+              <span class="source">Johnny’s Selected Seeds</span>
+              <span class="year">2024</span>
+              <span class="status-pill mostly_full">Good</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="opuLitVP3l58UeG6t8fZ" data-plant="Celery" data-variety="Tango">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_chamomile">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Chamomile</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_chamomile" data-plant="Chamomile">
@@ -1030,7 +1162,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -1046,8 +1178,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_chard">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Chard</span>
           <span class="plant-count">4 varieties</span>
           <div class="rating section-rating" data-key="plant_chard" data-plant="Chard">
@@ -1057,7 +1190,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -1072,7 +1205,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Chard Ford Hook</span>
             <div class="seed-details">
@@ -1087,7 +1220,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Chard Large White Ribbed</span>
             <div class="seed-details">
@@ -1102,7 +1235,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Chard Ruby Red</span>
             <div class="seed-details">
@@ -1118,10 +1251,11 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_chervil">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Chervil</span>
-          <span class="plant-count">1 variety</span>
+          <span class="plant-count">2 varieties</span>
           <div class="rating section-rating" data-key="plant_chervil" data-plant="Chervil">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
@@ -1129,12 +1263,12 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic,Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
-              <span class="source">Organo Republic, Survival Essentials</span>
-              <span class="year">2026</span>
+              <span class="source">Organo Republic</span>
+              <span class="year">2025</span>
               <span class="status-pill full">Full</span>
             </div>
           </div>
@@ -1143,12 +1277,28 @@
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Curled</span>
+            <div class="seed-details">
+              <span class="source">Survival Essentials</span>
+              <span class="year">2026</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="aI6cR9O0o9eUNGEd0Vo9" data-plant="Chervil" data-variety="Curled">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_chives">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Chives</span>
-          <span class="plant-count">1 variety</span>
+          <span class="plant-count">2 varieties</span>
           <div class="rating section-rating" data-key="plant_chives" data-plant="Chives">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
@@ -1156,11 +1306,11 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic,Johnny’s Selected Seeds">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
-              <span class="source">Organo Republic, Johnny’s Selected Seeds</span>
+              <span class="source">Organo Republic</span>
               <span class="year">2025</span>
               <span class="status-pill full">Full</span>
             </div>
@@ -1170,10 +1320,26 @@
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Staro</span>
+            <div class="seed-details">
+              <span class="source">Johnny’s Selected Seeds</span>
+              <span class="year">2025</span>
+              <span class="status-pill empty">Empty</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="RHuIbMPT6wjaQ7P66TJS" data-plant="Chives" data-variety="Staro">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_cilantro">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Cilantro</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_cilantro" data-plant="Cilantro">
@@ -1183,7 +1349,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Cilantro</span>
             <div class="seed-details">
@@ -1199,8 +1365,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_collard">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Collard</span>
           <span class="plant-count">3 varieties</span>
           <div class="rating section-rating" data-key="plant_collard" data-plant="Collard">
@@ -1210,7 +1377,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -1225,7 +1392,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Georgia Southern</span>
             <div class="seed-details">
@@ -1240,7 +1407,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Vates</span>
             <div class="seed-details">
@@ -1256,10 +1423,11 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_corn">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Corn</span>
-          <span class="plant-count">2 varieties</span>
+          <span class="plant-count">4 varieties</span>
           <div class="rating section-rating" data-key="plant_corn" data-plant="Corn">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
@@ -1267,22 +1435,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Johnny’s Selected Seeds">
-          <div class="seed-info">
-            <span class="variety-name">(standard)</span>
-            <div class="seed-details">
-              <span class="source">Johnny’s Selected Seeds</span>
-              <span class="year">2024</span>
-              <span class="status-pill mostly_full">Mostly Full</span>
-            </div>
-          </div>
-          <div class="rating variety-rating" data-key="OOddQun7zGhNreYpbx7B" data-plant="Corn" data-variety="">
-            <button class="star" data-value="1">☆</button>
-            <button class="star" data-value="2">☆</button>
-            <button class="star" data-value="3">☆</button>
-          </div>
-        </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Golden Bantam</span>
             <div class="seed-details">
@@ -1296,10 +1449,56 @@
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Natural Sweet</span>
+            <div class="seed-details">
+              <span class="source">Johnny’s Selected Seeds</span>
+              <span class="year">2024</span>
+              <span class="status-pill mostly_full">Good</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="OOddQun7zGhNreYpbx7B" data-plant="Corn" data-variety="Natural Sweet">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Ornamental, Glass Gem</span>
+            <div class="seed-details">
+              <span class="source">Johnny’s Selected Seeds</span>
+              <span class="year">2024</span>
+              <span class="status-pill mostly_full">Good</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="Q3Var18ZQo1FHndOhTzt" data-plant="Corn" data-variety="Ornamental, Glass Gem">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Robust 997</span>
+            <div class="seed-details">
+              <span class="source">Johnny’s Selected Seeds</span>
+              <span class="year">2024</span>
+              <span class="status-pill mostly_full">Good</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="uOlK28LiXI2N5zOufa1C" data-plant="Corn" data-variety="Robust 997">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_cucumber">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Cucumber</span>
           <span class="plant-count">5 varieties</span>
           <div class="rating section-rating" data-key="plant_cucumber" data-plant="Cucumber">
@@ -1309,13 +1508,13 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
               <span class="source">Lush & Dew</span>
               <span class="year">2025</span>
-              <span class="status-pill nearly_empty">Nearly Empty</span>
+              <span class="status-pill nearly_empty">Low</span>
             </div>
           </div>
           <div class="rating variety-rating" data-key="hLNj5GCoHZ1B1LbI7y7b" data-plant="Cucumber" data-variety="">
@@ -1324,7 +1523,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Boston Pickling</span>
             <div class="seed-details">
@@ -1339,7 +1538,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Marketmore</span>
             <div class="seed-details">
@@ -1354,7 +1553,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Poinsett</span>
             <div class="seed-details">
@@ -1369,7 +1568,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Straight Eight</span>
             <div class="seed-details">
@@ -1385,8 +1584,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_cumin">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Cumin</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_cumin" data-plant="Cumin">
@@ -1396,24 +1596,25 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
-            <span class="variety-name">Common</span>
+            <span class="variety-name">(standard)</span>
             <div class="seed-details">
               <span class="source">Survival Essentials</span>
               <span class="year">2026</span>
               <span class="status-pill full">Full</span>
             </div>
           </div>
-          <div class="rating variety-rating" data-key="02gkvTDNuTfYZSILcCwg" data-plant="Cumin" data-variety="Common">
+          <div class="rating variety-rating" data-key="02gkvTDNuTfYZSILcCwg" data-plant="Cumin" data-variety="">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_dill">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Dill</span>
           <span class="plant-count">2 varieties</span>
           <div class="rating section-rating" data-key="plant_dill" data-plant="Dill">
@@ -1423,7 +1624,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -1438,7 +1639,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Mammoth</span>
             <div class="seed-details">
@@ -1454,8 +1655,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_eggplant">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Eggplant</span>
           <span class="plant-count">2 varieties</span>
           <div class="rating section-rating" data-key="plant_eggplant" data-plant="Eggplant">
@@ -1465,7 +1667,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Black Beauty</span>
             <div class="seed-details">
@@ -1480,7 +1682,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Long Purple</span>
             <div class="seed-details">
@@ -1496,10 +1698,11 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_endive_escarole">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Endive/Escarole</span>
-          <span class="plant-count">1 variety</span>
+          <span class="plant-count">3 varieties</span>
           <div class="rating section-rating" data-key="plant_endive_escarole" data-plant="Endive/Escarole">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
@@ -1507,24 +1710,55 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
-            <span class="variety-name">(standard)</span>
+            <span class="variety-name">Broadleaf</span>
             <div class="seed-details">
               <span class="source">Organo Republic</span>
               <span class="year">2025</span>
               <span class="status-pill full">Full</span>
             </div>
           </div>
-          <div class="rating variety-rating" data-key="2FitNUprFR0zas85JHW8" data-plant="Endive/Escarole" data-variety="">
+          <div class="rating variety-rating" data-key="W7qLSDMNgtefpPD7o7Gt" data-plant="Endive/Escarole" data-variety="Broadleaf">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Curled Ruffec</span>
+            <div class="seed-details">
+              <span class="source">Organo Republic</span>
+              <span class="year">2025</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="2FitNUprFR0zas85JHW8" data-plant="Endive/Escarole" data-variety="Curled Ruffec">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Radicchio</span>
+            <div class="seed-details">
+              <span class="source">Organo Republic</span>
+              <span class="year">2025</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="NUjAf3qc1nUO4omWOhcc" data-plant="Endive/Escarole" data-variety="Radicchio">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_fennel">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Fennel</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_fennel" data-plant="Fennel">
@@ -1534,24 +1768,25 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
-            <span class="variety-name">Florence</span>
+            <span class="variety-name">(standard)</span>
             <div class="seed-details">
               <span class="source">Survival Essentials</span>
               <span class="year">2026</span>
               <span class="status-pill full">Full</span>
             </div>
           </div>
-          <div class="rating variety-rating" data-key="06BfzakanQJjLP0SFyIg" data-plant="Fennel" data-variety="Florence">
+          <div class="rating variety-rating" data-key="06BfzakanQJjLP0SFyIg" data-plant="Fennel" data-variety="">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_fig">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Fig</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_fig" data-plant="Fig">
@@ -1561,7 +1796,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -1577,8 +1812,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_kale">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Kale</span>
           <span class="plant-count">4 varieties</span>
           <div class="rating section-rating" data-key="plant_kale" data-plant="Kale">
@@ -1588,7 +1824,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -1603,7 +1839,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Dwarf Siberian</span>
             <div class="seed-details">
@@ -1618,7 +1854,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Red Russian</span>
             <div class="seed-details">
@@ -1633,7 +1869,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Vates Dwarf Curled Blue Scotch</span>
             <div class="seed-details">
@@ -1649,8 +1885,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_kohlrabi">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Kohlrabi</span>
           <span class="plant-count">3 varieties</span>
           <div class="rating section-rating" data-key="plant_kohlrabi" data-plant="Kohlrabi">
@@ -1660,7 +1897,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -1675,7 +1912,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Purple Vienna</span>
             <div class="seed-details">
@@ -1690,7 +1927,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">White Vienna</span>
             <div class="seed-details">
@@ -1706,8 +1943,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_leek">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Leek</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_leek" data-plant="Leek">
@@ -1717,7 +1955,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -1733,10 +1971,11 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_lettuce">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Lettuce</span>
-          <span class="plant-count">8 varieties</span>
+          <span class="plant-count">13 varieties</span>
           <div class="rating section-rating" data-key="plant_lettuce" data-plant="Lettuce">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
@@ -1744,22 +1983,22 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Johnny’s Selected Seeds,Lush & Dew,Organo Republic,Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
-              <span class="source">Johnny’s Selected Seeds, Lush & Dew, Organo Republic, Survival Essentials</span>
-              <span class="year">2026</span>
-              <span class="status-pill mostly_full">Mostly Full</span>
+              <span class="source">Lush & Dew</span>
+              <span class="year">2025</span>
+              <span class="status-pill full">Full</span>
             </div>
           </div>
-          <div class="rating variety-rating" data-key="Kt7AVSoJhLa8GvzyE3VE" data-plant="Lettuce" data-variety="">
+          <div class="rating variety-rating" data-key="MVvCEblkiI88pCmluRYo" data-plant="Lettuce" data-variety="">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Black Seeded Simpson</span>
             <div class="seed-details">
@@ -1774,7 +2013,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Bronze Mignonette</span>
             <div class="seed-details">
@@ -1789,7 +2028,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Butter Crunch</span>
             <div class="seed-details">
@@ -1804,7 +2043,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Buttercrunch</span>
             <div class="seed-details">
@@ -1819,22 +2058,37 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
-            <span class="variety-name">Iceberg</span>
+            <span class="variety-name">Crispino</span>
             <div class="seed-details">
-              <span class="source">Survival Essentials</span>
-              <span class="year">2026</span>
-              <span class="status-pill full">Full</span>
+              <span class="source">Johnny’s Selected Seeds</span>
+              <span class="year">2024</span>
+              <span class="status-pill mostly_full">Good</span>
             </div>
           </div>
-          <div class="rating variety-rating" data-key="wInxUlXDTMBljsG4sRJj" data-plant="Lettuce" data-variety="Iceberg">
+          <div class="rating variety-rating" data-key="Kt7AVSoJhLa8GvzyE3VE" data-plant="Lettuce" data-variety="Crispino">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Iceberg</span>
+            <div class="seed-details">
+              <select class="source-select"><option>Any</option><option>Organo Republic</option><option>Survival Essentials</option></select>
+              <span class="year">2026</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="NNmWLRZAGmnWHzbBXnLB" data-plant="Lettuce" data-variety="Iceberg">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Oak Leaf</span>
             <div class="seed-details">
@@ -1849,7 +2103,37 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Oakleaf Green</span>
+            <div class="seed-details">
+              <span class="source">Organo Republic</span>
+              <span class="year">2025</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="qB4bM4WJUQarhScacSps" data-plant="Lettuce" data-variety="Oakleaf Green">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Prizehead</span>
+            <div class="seed-details">
+              <select class="source-select"><option>Any</option><option>Organo Republic</option><option>Survival Essentials</option></select>
+              <span class="year">2026</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="WpVbY55TlWm3ORySr6QI" data-plant="Lettuce" data-variety="Prizehead">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Red Romaine</span>
             <div class="seed-details">
@@ -1863,12 +2147,43 @@
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Romaine</span>
+            <div class="seed-details">
+              <span class="source">Organo Republic</span>
+              <span class="year">2025</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="y5R6w0oF79IbKw5ku14A" data-plant="Lettuce" data-variety="Romaine">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Sunland</span>
+            <div class="seed-details">
+              <span class="source">Johnny’s Selected Seeds</span>
+              <span class="year">2024</span>
+              <span class="status-pill mostly_full">Good</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="lBJeoIsHdihkVuIkgpse" data-plant="Lettuce" data-variety="Sunland">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_marigold">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Marigold</span>
-          <span class="plant-count">1 variety</span>
+          <span class="plant-count">2 varieties</span>
           <div class="rating section-rating" data-key="plant_marigold" data-plant="Marigold">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
@@ -1876,12 +2191,12 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew,Mathews Farms">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
-              <span class="source">Lush & Dew, Mathews Farms</span>
-              <span class="year">2026</span>
+              <span class="source">Lush & Dew</span>
+              <span class="year">2025</span>
               <span class="status-pill full">Full</span>
             </div>
           </div>
@@ -1890,10 +2205,26 @@
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Giant Orange</span>
+            <div class="seed-details">
+              <span class="source">Mathews Farms</span>
+              <span class="year">2026</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="j93NVJrMiPEi0EdvGb9L" data-plant="Marigold" data-variety="Giant Orange">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_mint">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Mint</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_mint" data-plant="Mint">
@@ -1903,7 +2234,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Spearmint</span>
             <div class="seed-details">
@@ -1919,8 +2250,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_mustard">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Mustard</span>
           <span class="plant-count">4 varieties</span>
           <div class="rating section-rating" data-key="plant_mustard" data-plant="Mustard">
@@ -1930,7 +2262,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Florida Broadleaf</span>
             <div class="seed-details">
@@ -1945,7 +2277,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Mizuna</span>
             <div class="seed-details">
@@ -1960,7 +2292,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Old Fashioned</span>
             <div class="seed-details">
@@ -1975,11 +2307,11 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Organo Republic,Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Southern Giant Curled</span>
             <div class="seed-details">
-              <span class="source">Organo Republic, Survival Essentials</span>
+              <select class="source-select"><option>Any</option><option>Organo Republic</option><option>Survival Essentials</option></select>
               <span class="year">2026</span>
               <span class="status-pill full">Full</span>
             </div>
@@ -1991,8 +2323,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_nasturtium">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Nasturtium</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_nasturtium" data-plant="Nasturtium">
@@ -2002,26 +2335,27 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Johnny’s Selected Seeds">
+        <div class="seed-item">
           <div class="seed-info">
-            <span class="variety-name">(standard)</span>
+            <span class="variety-name">Alaska Mix</span>
             <div class="seed-details">
               <span class="source">Johnny’s Selected Seeds</span>
               <span class="year">2024</span>
-              <span class="status-pill half_full">Half Full</span>
+              <span class="status-pill half_full">Half</span>
             </div>
           </div>
-          <div class="rating variety-rating" data-key="27HzUlHtwYq6Uz27qVQV" data-plant="Nasturtium" data-variety="">
+          <div class="rating variety-rating" data-key="27HzUlHtwYq6Uz27qVQV" data-plant="Nasturtium" data-variety="Alaska Mix">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_okra">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Okra</span>
-          <span class="plant-count">4 varieties</span>
+          <span class="plant-count">5 varieties</span>
           <div class="rating section-rating" data-key="plant_okra" data-plant="Okra">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
@@ -2029,13 +2363,13 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew,Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
-              <span class="source">Lush & Dew, Survival Essentials</span>
-              <span class="year">2026</span>
-              <span class="status-pill nearly_empty">Nearly Empty</span>
+              <span class="source">Lush & Dew</span>
+              <span class="year">2025</span>
+              <span class="status-pill nearly_empty">Low</span>
             </div>
           </div>
           <div class="rating variety-rating" data-key="wtYMYxfmWpfBSeW3kKO5" data-plant="Okra" data-variety="">
@@ -2044,7 +2378,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Clemson Spineless</span>
             <div class="seed-details">
@@ -2059,7 +2393,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Emerald</span>
             <div class="seed-details">
@@ -2074,7 +2408,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Perkin s Long Pod</span>
             <div class="seed-details">
@@ -2088,12 +2422,28 @@
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Red Burgundy</span>
+            <div class="seed-details">
+              <span class="source">Survival Essentials</span>
+              <span class="year">2026</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="cMYxNxAXlp7i5xCwlhib" data-plant="Okra" data-variety="Red Burgundy">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_onion">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Onion</span>
-          <span class="plant-count">7 varieties</span>
+          <span class="plant-count">10 varieties</span>
           <div class="rating section-rating" data-key="plant_onion" data-plant="Onion">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
@@ -2101,22 +2451,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew,Organo Republic,Johnny’s Selected Seeds">
-          <div class="seed-info">
-            <span class="variety-name">(standard)</span>
-            <div class="seed-details">
-              <span class="source">Lush & Dew, Organo Republic, Johnny’s Selected Seeds</span>
-              <span class="year">2025</span>
-              <span class="status-pill full">Full</span>
-            </div>
-          </div>
-          <div class="rating variety-rating" data-key="4csTHw4wsvEI0NJVjUBc" data-plant="Onion" data-variety="">
-            <button class="star" data-value="1">☆</button>
-            <button class="star" data-value="2">☆</button>
-            <button class="star" data-value="3">☆</button>
-          </div>
-        </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Burgundy Red</span>
             <div class="seed-details">
@@ -2131,7 +2466,22 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Cabernet</span>
+            <div class="seed-details">
+              <span class="source">Johnny’s Selected Seeds</span>
+              <span class="year">2024</span>
+              <span class="status-pill mostly_full">Good</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="MuHUvtnWo8bOyUhDB6dC" data-plant="Onion" data-variety="Cabernet">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Evergreen Bunching Nebuka</span>
             <div class="seed-details">
@@ -2146,7 +2496,37 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Red Burgundy</span>
+            <div class="seed-details">
+              <span class="source">Organo Republic</span>
+              <span class="year">2025</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="IcvbHOxPPx8ksu5dA9bw" data-plant="Onion" data-variety="Red Burgundy">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Red Onion</span>
+            <div class="seed-details">
+              <span class="source">Lush & Dew</span>
+              <span class="year">2025</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="4csTHw4wsvEI0NJVjUBc" data-plant="Onion" data-variety="Red Onion">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Tokyo Long White</span>
             <div class="seed-details">
@@ -2161,7 +2541,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Walla Walla Sweet</span>
             <div class="seed-details">
@@ -2176,7 +2556,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">White Sweet Spanish</span>
             <div class="seed-details">
@@ -2191,7 +2571,22 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Yago</span>
+            <div class="seed-details">
+              <span class="source">Johnny’s Selected Seeds</span>
+              <span class="year">2024</span>
+              <span class="status-pill mostly_full">Good</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="omQK2Xg2pAyBFt87e6as" data-plant="Onion" data-variety="Yago">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Yellow Sweet Spanish</span>
             <div class="seed-details">
@@ -2207,10 +2602,11 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_parsley">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Parsley</span>
-          <span class="plant-count">3 varieties</span>
+          <span class="plant-count">4 varieties</span>
           <div class="rating section-rating" data-key="plant_parsley" data-plant="Parsley">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
@@ -2218,11 +2614,11 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew,Johnny’s Selected Seeds">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
-              <span class="source">Lush & Dew, Johnny’s Selected Seeds</span>
+              <span class="source">Lush & Dew</span>
               <span class="year">2025</span>
               <span class="status-pill full">Full</span>
             </div>
@@ -2233,7 +2629,22 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Giant of Italy</span>
+            <div class="seed-details">
+              <span class="source">Johnny’s Selected Seeds</span>
+              <span class="year">2024</span>
+              <span class="status-pill mostly_full">Good</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="xwYWAebkQYaFi6O8hIm0" data-plant="Parsley" data-variety="Giant of Italy">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Italian Flat Leaved Organic</span>
             <div class="seed-details">
@@ -2248,7 +2659,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Moss Curled</span>
             <div class="seed-details">
@@ -2264,8 +2675,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_parsnip">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Parsnip</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_parsnip" data-plant="Parsnip">
@@ -2275,7 +2687,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -2291,8 +2703,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_pea">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Pea</span>
           <span class="plant-count">4 varieties</span>
           <div class="rating section-rating" data-key="plant_pea" data-plant="Pea">
@@ -2302,11 +2715,11 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic,Lush & Dew">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
-              <span class="source">Organo Republic, Lush & Dew</span>
+              <select class="source-select"><option>Any</option><option>Organo Republic</option><option>Lush & Dew</option></select>
               <span class="year">2025</span>
               <span class="status-pill full">Full</span>
             </div>
@@ -2317,7 +2730,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Green Arrow</span>
             <div class="seed-details">
@@ -2332,7 +2745,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Little Marvel</span>
             <div class="seed-details">
@@ -2347,7 +2760,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Sugar Snap</span>
             <div class="seed-details">
@@ -2363,8 +2776,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_pepper">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Pepper</span>
           <span class="plant-count">7 varieties</span>
           <div class="rating section-rating" data-key="plant_pepper" data-plant="Pepper">
@@ -2374,7 +2788,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Banana Sweet</span>
             <div class="seed-details">
@@ -2389,7 +2803,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">California Wonder</span>
             <div class="seed-details">
@@ -2404,7 +2818,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Cayenne Long Red Thin</span>
             <div class="seed-details">
@@ -2419,7 +2833,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Cubanelle</span>
             <div class="seed-details">
@@ -2434,7 +2848,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Early Jalapeno</span>
             <div class="seed-details">
@@ -2449,7 +2863,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Hungarian Hot Wax</span>
             <div class="seed-details">
@@ -2464,7 +2878,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Serrano</span>
             <div class="seed-details">
@@ -2480,8 +2894,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_persian_cress">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Persian Cress</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_persian_cress" data-plant="Persian Cress">
@@ -2491,24 +2906,25 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic,Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
-            <span class="variety-name">(standard)</span>
+            <span class="variety-name">Curled</span>
             <div class="seed-details">
-              <span class="source">Organo Republic, Survival Essentials</span>
+              <select class="source-select"><option>Any</option><option>Organo Republic</option><option>Survival Essentials</option></select>
               <span class="year">2026</span>
               <span class="status-pill full">Full</span>
             </div>
           </div>
-          <div class="rating variety-rating" data-key="v1NnsARYlDGeU8GGJIHQ" data-plant="Persian Cress" data-variety="">
+          <div class="rating variety-rating" data-key="v1NnsARYlDGeU8GGJIHQ" data-plant="Persian Cress" data-variety="Curled">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_pumpkin">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Pumpkin</span>
           <span class="plant-count">3 varieties</span>
           <div class="rating section-rating" data-key="plant_pumpkin" data-plant="Pumpkin">
@@ -2518,13 +2934,13 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Graffiti Grdn,Sow Right Seeds,Homegrown Garden">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
-              <span class="source">Graffiti Grdn, Sow Right Seeds, Homegrown Garden</span>
+              <select class="source-select"><option>Any</option><option>Graffiti Grdn</option><option>Sow Right Seeds</option><option>Homegrown Garden</option></select>
               <span class="year">2025</span>
-              <span class="status-pill half_full">Half Full</span>
+              <span class="status-pill half_full">Half</span>
             </div>
           </div>
           <div class="rating variety-rating" data-key="C6dwJ7G2PVynyAqRxdIq" data-plant="Pumpkin" data-variety="">
@@ -2533,7 +2949,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Mammoth Gold</span>
             <div class="seed-details">
@@ -2548,7 +2964,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Small Sugar</span>
             <div class="seed-details">
@@ -2564,10 +2980,11 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_radish">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Radish</span>
-          <span class="plant-count">10 varieties</span>
+          <span class="plant-count">12 varieties</span>
           <div class="rating section-rating" data-key="plant_radish" data-plant="Radish">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
@@ -2575,22 +2992,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew,Organo Republic,Survival Essentials">
-          <div class="seed-info">
-            <span class="variety-name">(standard)</span>
-            <div class="seed-details">
-              <span class="source">Lush & Dew, Organo Republic, Survival Essentials</span>
-              <span class="year">2026</span>
-              <span class="status-pill full">Full</span>
-            </div>
-          </div>
-          <div class="rating variety-rating" data-key="L8nWqxczCIjaULUELqt6" data-plant="Radish" data-variety="">
-            <button class="star" data-value="1">☆</button>
-            <button class="star" data-value="2">☆</button>
-            <button class="star" data-value="3">☆</button>
-          </div>
-        </div>
-        <div class="seed-item" data-sources="Lush & Dew">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Burpee White</span>
             <div class="seed-details">
@@ -2605,11 +3007,26 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Organo Republic,Survival Essentials">
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Champion</span>
+            <div class="seed-details">
+              <select class="source-select"><option>Any</option><option>Organo Republic</option><option>Survival Essentials</option></select>
+              <span class="year">2026</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="Ow8R9qGJ9x7jlERTDFy5" data-plant="Radish" data-variety="Champion">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Cherry Belle</span>
             <div class="seed-details">
-              <span class="source">Organo Republic, Survival Essentials</span>
+              <select class="source-select"><option>Any</option><option>Organo Republic</option><option>Survival Essentials</option></select>
               <span class="year">2026</span>
               <span class="status-pill full">Full</span>
             </div>
@@ -2620,7 +3037,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">China Rose</span>
             <div class="seed-details">
@@ -2635,7 +3052,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Comet</span>
             <div class="seed-details">
@@ -2650,7 +3067,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Daikon Long</span>
             <div class="seed-details">
@@ -2665,7 +3082,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">French Breakfast</span>
             <div class="seed-details">
@@ -2680,7 +3097,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Lush & Dew">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">French Breakfast Organic</span>
             <div class="seed-details">
@@ -2695,7 +3112,37 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Radish Green</span>
+            <div class="seed-details">
+              <span class="source">Lush & Dew</span>
+              <span class="year">2025</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="L8nWqxczCIjaULUELqt6" data-plant="Radish" data-variety="Radish Green">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Radish Red</span>
+            <div class="seed-details">
+              <span class="source">Lush & Dew</span>
+              <span class="year">2025</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="dLPU5h0mx9ja5E5ExIU2" data-plant="Radish" data-variety="Radish Red">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Watermelon</span>
             <div class="seed-details">
@@ -2710,7 +3157,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">White Icicle</span>
             <div class="seed-details">
@@ -2726,8 +3173,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_rutabaga">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Rutabaga</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_rutabaga" data-plant="Rutabaga">
@@ -2737,7 +3185,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">American Purple Top</span>
             <div class="seed-details">
@@ -2753,8 +3201,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_sage">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Sage</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_sage" data-plant="Sage">
@@ -2764,7 +3213,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -2780,8 +3229,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_salsify">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Salsify</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_salsify" data-plant="Salsify">
@@ -2791,7 +3241,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Mammoth Sandwich Island</span>
             <div class="seed-details">
@@ -2807,8 +3257,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_savory">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Savory</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_savory" data-plant="Savory">
@@ -2818,24 +3269,25 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
-            <span class="variety-name">(standard)</span>
+            <span class="variety-name">Summer</span>
             <div class="seed-details">
               <span class="source">Survival Essentials</span>
               <span class="year">2026</span>
               <span class="status-pill full">Full</span>
             </div>
           </div>
-          <div class="rating variety-rating" data-key="Fj3JpgZB0S605S6mH5gH" data-plant="Savory" data-variety="">
+          <div class="rating variety-rating" data-key="Fj3JpgZB0S605S6mH5gH" data-plant="Savory" data-variety="Summer">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_spinach">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Spinach</span>
           <span class="plant-count">3 varieties</span>
           <div class="rating section-rating" data-key="plant_spinach" data-plant="Spinach">
@@ -2845,7 +3297,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -2860,7 +3312,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Bloomsdale Long Standing</span>
             <div class="seed-details">
@@ -2875,7 +3327,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Noble Giant</span>
             <div class="seed-details">
@@ -2891,8 +3343,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_squash">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Squash</span>
           <span class="plant-count">10 varieties</span>
           <div class="rating section-rating" data-key="plant_squash" data-plant="Squash">
@@ -2902,7 +3355,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Blue Hubbard</span>
             <div class="seed-details">
@@ -2917,7 +3370,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Cocozelle</span>
             <div class="seed-details">
@@ -2932,7 +3385,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Dark Green</span>
             <div class="seed-details">
@@ -2947,7 +3400,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Early Prolific Straight Neck</span>
             <div class="seed-details">
@@ -2962,7 +3415,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Early White Bush</span>
             <div class="seed-details">
@@ -2977,7 +3430,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Golden</span>
             <div class="seed-details">
@@ -2992,7 +3445,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Table King Bush</span>
             <div class="seed-details">
@@ -3007,7 +3460,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Table Queen</span>
             <div class="seed-details">
@@ -3022,7 +3475,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Vegetable Spaghetti</span>
             <div class="seed-details">
@@ -3037,7 +3490,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Waltham Butternut</span>
             <div class="seed-details">
@@ -3053,8 +3506,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_strawberries">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Strawberries</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_strawberries" data-plant="Strawberries">
@@ -3064,7 +3518,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -3080,8 +3534,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_sunflower">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Sunflower</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_sunflower" data-plant="Sunflower">
@@ -3091,13 +3546,13 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
               <span class="source">Lush & Dew</span>
               <span class="year">2025</span>
-              <span class="status-pill nearly_empty">Nearly Empty</span>
+              <span class="status-pill nearly_empty">Low</span>
             </div>
           </div>
           <div class="rating variety-rating" data-key="wpWqwmFOVJ5eEDLBCFAv" data-plant="Sunflower" data-variety="">
@@ -3107,10 +3562,11 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_thyme">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Thyme</span>
-          <span class="plant-count">2 varieties</span>
+          <span class="plant-count">3 varieties</span>
           <div class="rating section-rating" data-key="plant_thyme" data-plant="Thyme">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
@@ -3118,11 +3574,11 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Organo Republic,Johnny’s Selected Seeds">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
-              <span class="source">Organo Republic, Johnny’s Selected Seeds</span>
+              <span class="source">Organo Republic</span>
               <span class="year">2025</span>
               <span class="status-pill full">Full</span>
             </div>
@@ -3133,7 +3589,22 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Summer</span>
+            <div class="seed-details">
+              <span class="source">Johnny’s Selected Seeds</span>
+              <span class="year">2024</span>
+              <span class="status-pill mostly_full">Good</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="nRVXPBPhbJgcgmSpUfMX" data-plant="Thyme" data-variety="Summer">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Winter</span>
             <div class="seed-details">
@@ -3149,10 +3620,11 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_tomato">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Tomato</span>
-          <span class="plant-count">14 varieties</span>
+          <span class="plant-count">15 varieties</span>
           <div class="rating section-rating" data-key="plant_tomato" data-plant="Tomato">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
@@ -3160,7 +3632,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -3175,7 +3647,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Ace 55</span>
             <div class="seed-details">
@@ -3190,7 +3662,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Beefsteak Red</span>
             <div class="seed-details">
@@ -3205,7 +3677,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Lush & Dew">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Black Cherry</span>
             <div class="seed-details">
@@ -3220,7 +3692,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Cal Ace VF</span>
             <div class="seed-details">
@@ -3235,7 +3707,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Floradade</span>
             <div class="seed-details">
@@ -3250,7 +3722,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Golden Jubilee</span>
             <div class="seed-details">
@@ -3265,7 +3737,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Homestead 24</span>
             <div class="seed-details">
@@ -3280,7 +3752,22 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Juliet Hybrid</span>
+            <div class="seed-details">
+              <span class="source">Lush & Dew</span>
+              <span class="year">2025</span>
+              <span class="status-pill full">Full</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="85iIyZMRAJvSkLvFUyQP" data-plant="Tomato" data-variety="Juliet Hybrid">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Manalucie</span>
             <div class="seed-details">
@@ -3295,7 +3782,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Marglobe Improved</span>
             <div class="seed-details">
@@ -3310,7 +3797,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Red Cherry Large</span>
             <div class="seed-details">
@@ -3325,7 +3812,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Roma</span>
             <div class="seed-details">
@@ -3340,7 +3827,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Rutgers</span>
             <div class="seed-details">
@@ -3355,11 +3842,11 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Lush & Dew,Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Yellow Pear</span>
             <div class="seed-details">
-              <span class="source">Lush & Dew, Survival Essentials</span>
+              <select class="source-select"><option>Any</option><option>Lush & Dew</option><option>Survival Essentials</option></select>
               <span class="year">2026</span>
               <span class="status-pill full">Full</span>
             </div>
@@ -3371,10 +3858,11 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_turnip">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Turnip</span>
-          <span class="plant-count">5 varieties</span>
+          <span class="plant-count">6 varieties</span>
           <div class="rating section-rating" data-key="plant_turnip" data-plant="Turnip">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
@@ -3382,22 +3870,37 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew,Organo Republic">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
-              <span class="source">Lush & Dew, Organo Republic</span>
+              <span class="source">Organo Republic</span>
               <span class="year">2025</span>
-              <span class="status-pill nearly_empty">Nearly Empty</span>
+              <span class="status-pill full">Full</span>
             </div>
           </div>
-          <div class="rating variety-rating" data-key="4N168qDcfRvwRQkXd9UB" data-plant="Turnip" data-variety="">
+          <div class="rating variety-rating" data-key="l6KQEj8ZPLfv4YGHd8kz" data-plant="Turnip" data-variety="">
             <button class="star" data-value="1">☆</button>
             <button class="star" data-value="2">☆</button>
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
+          <div class="seed-info">
+            <span class="variety-name">Jicama</span>
+            <div class="seed-details">
+              <span class="source">Lush & Dew</span>
+              <span class="year">2025</span>
+              <span class="status-pill nearly_empty">Low</span>
+            </div>
+          </div>
+          <div class="rating variety-rating" data-key="4N168qDcfRvwRQkXd9UB" data-plant="Turnip" data-variety="Jicama">
+            <button class="star" data-value="1">☆</button>
+            <button class="star" data-value="2">☆</button>
+            <button class="star" data-value="3">☆</button>
+          </div>
+        </div>
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Purple Top White Globe</span>
             <div class="seed-details">
@@ -3412,7 +3915,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Seven Top</span>
             <div class="seed-details">
@@ -3427,7 +3930,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Shogoin</span>
             <div class="seed-details">
@@ -3442,7 +3945,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">White Egg</span>
             <div class="seed-details">
@@ -3458,8 +3961,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_unknown">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Unknown</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_unknown" data-plant="Unknown">
@@ -3469,7 +3973,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -3485,8 +3989,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_watermelon">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Watermelon</span>
           <span class="plant-count">7 varieties</span>
           <div class="rating section-rating" data-key="plant_watermelon" data-plant="Watermelon">
@@ -3496,13 +4001,13 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
               <span class="source">Lush & Dew</span>
               <span class="year">2025</span>
-              <span class="status-pill nearly_empty">Nearly Empty</span>
+              <span class="status-pill nearly_empty">Low</span>
             </div>
           </div>
           <div class="rating variety-rating" data-key="hPQqCtg2lh4iy2RRUL2b" data-plant="Watermelon" data-variety="">
@@ -3511,7 +4016,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Black Diamond</span>
             <div class="seed-details">
@@ -3526,7 +4031,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Charleston Grey</span>
             <div class="seed-details">
@@ -3541,7 +4046,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Congo</span>
             <div class="seed-details">
@@ -3556,7 +4061,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Crimson Sweet</span>
             <div class="seed-details">
@@ -3571,7 +4076,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Sugar Baby</span>
             <div class="seed-details">
@@ -3586,7 +4091,7 @@
             <button class="star" data-value="3">☆</button>
           </div>
         </div>
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">Tendersweet Orange</span>
             <div class="seed-details">
@@ -3602,8 +4107,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_yarrow">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Yarrow</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_yarrow" data-plant="Yarrow">
@@ -3613,7 +4119,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Survival Essentials">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">White</span>
             <div class="seed-details">
@@ -3629,8 +4135,9 @@
           </div>
         </div></div>
       </div>
-      <div class="plant-section">
+      <div class="plant-section" data-plant-id="plant_zinnia">
         <div class="plant-header">
+          <span class="toggle-icon">▶</span>
           <span class="plant-name">Zinnia</span>
           <span class="plant-count">1 variety</span>
           <div class="rating section-rating" data-key="plant_zinnia" data-plant="Zinnia">
@@ -3640,7 +4147,7 @@
           </div>
         </div>
         <div class="varieties">
-        <div class="seed-item" data-sources="Lush & Dew">
+        <div class="seed-item">
           <div class="seed-info">
             <span class="variety-name">(standard)</span>
             <div class="seed-details">
@@ -3657,8 +4164,8 @@
         </div></div>
       </div>
   <div class="actions">
-    <button class="btn btn-primary" id="email-btn">📧 Email to Favorite Son</button>
-    <button class="btn btn-secondary" id="clear-btn">✕ Clear All</button>
+    <button class="btn btn-primary" id="email-btn">💌 Email to Favorite Son</button>
+    <button class="btn btn-secondary" id="clear-btn">🗑️ Start Over</button>
   </div>
 
   <script>
@@ -3688,11 +4195,22 @@
       }
     });
 
+    // Toggle sections on header click
+    document.querySelectorAll('.plant-header').forEach(header => {
+      header.addEventListener('click', (e) => {
+        // Don't toggle if clicking on stars
+        if (e.target.closest('.rating')) return;
+        const section = header.closest('.plant-section');
+        section.classList.toggle('open');
+      });
+    });
+
     // Star clicks
     document.body.addEventListener('click', (e) => {
       const star = e.target.closest('.star');
       if (!star || star.disabled) return;
       e.preventDefault();
+      e.stopPropagation();
 
       const rating = star.closest('.rating');
       const key = rating.dataset.key;
@@ -3718,19 +4236,6 @@
       try { localStorage.setItem('seedRatings', JSON.stringify(ratings)); } catch(e) {}
     });
 
-    // Source filter
-    document.getElementById('source-filter').addEventListener('change', (e) => {
-      const source = e.target.value;
-      document.querySelectorAll('.seed-item').forEach(item => {
-        const sources = item.dataset.sources.split(',');
-        item.classList.toggle('hidden', source && !sources.includes(source));
-      });
-      document.querySelectorAll('.plant-section').forEach(section => {
-        const visible = section.querySelectorAll('.seed-item:not(.hidden)').length;
-        section.style.display = visible ? '' : 'none';
-      });
-    });
-
     function getReportText() {
       const items = [];
       Object.entries(ratings).forEach(([key, rating]) => {
@@ -3751,14 +4256,14 @@
       });
       Object.values(grouped).forEach(g => g.sort((a, b) => a.plant.localeCompare(b.plant)));
 
-      let text = "Mom's Seed Picks\n\n";
+      let text = "🌱 Mom's Garden Picks 🌻\n\n";
       if (grouped[3].length) {
         text += "⭐⭐⭐ MUST GROW!\n";
         grouped[3].forEach(s => text += "• " + s.text + "\n");
         text += "\n";
       }
       if (grouped[2].length) {
-        text += "⭐⭐ Yes Please\n";
+        text += "⭐⭐ Yes Please!\n";
         grouped[2].forEach(s => text += "• " + s.text + "\n");
         text += "\n";
       }
@@ -3766,18 +4271,19 @@
         text += "⭐ Maybe\n";
         grouped[1].forEach(s => text += "• " + s.text + "\n");
       }
+      text += "\n💚 Love, Mom";
       return text;
     }
 
     document.getElementById('email-btn').addEventListener('click', () => {
       const text = getReportText();
-      if (!text) { alert('Please rate at least one seed first!'); return; }
-      const subject = "Mom's Seed Picks for " + new Date().getFullYear();
+      if (!text) { alert('Please rate at least one seed first! 🌱'); return; }
+      const subject = "🌱 Mom's Garden Picks for " + new Date().getFullYear();
       window.location.href = 'mailto:jake.mathews@me.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text);
     });
 
     document.getElementById('clear-btn').addEventListener('click', () => {
-      if (confirm('Clear all ratings?')) {
+      if (confirm('Start over and clear all ratings?')) {
         ratings = {};
         try { localStorage.removeItem('seedRatings'); } catch(e) {}
         document.querySelectorAll('.star').forEach(s => { s.textContent = '☆'; s.classList.remove('active'); s.disabled = false; });
